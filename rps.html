@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Function computerPlay() for random selection: rock, paper, or scissors
+        function computerPlay() {
+            switch (Math.floor(Math.random() * 3)) {        //Random int from scaling for 3 choices
+                case 0: return "rock";                      
+                case 1: return "paper";
+                case 2: return "scissors";
+                default: alert("Something went wrong!");
+            }
+        }
+        
+        // Function playRound() to play 1 round of rps: takes in playerSelection and computerSelection
+        // > return winner as string
+        function playRound(computerSelection = computerPlay(), playerSelection = "default") {
+            let player = playerSelection;
+            let computer = computerSelection;
+            //      case insensitive for user input, validation loop unless user escaped.
+            while (player != "rock" && player != "paper" && player != "scissors") {
+                player = prompt("Make your choice (rock/paper/scissors): ");
+                if (player) {
+                    player = player.toLowerCase();
+                } else return;
+            }
+            if (player == computer) return "It's a tie!";
+
+            // check all player win conditions, player loses otherwise
+            if (player == "rock" && computer == "scissors" || 
+                player == "paper" && computer == "rock" || 
+                player == "scissors" && computer == "paper") {
+                return `Player wins! ${player} beats ${computer}`;
+            } else return `Player loses! ${computer} beats ${player}`;
+        }
+        
+        // Return result not console.log (log it outside)
+        // Function game(), using playRound() inside game to play a 5 round game, keep score, report winner 
+        //      can use loops
+        //      console.log() to display results of each round and winner at the end
+        //      prompt() user input
+
+        function Game() {
+            let playerWins = 0;             //track wins
+            let computerWins = 0;
+            let result;
+            
+            for (i = 0; i < 5; i++) {      //5 rounds
+                result = playRound(computerPlay());     //string result
+                if (result) {       //count win toward player if 'wins', computer if 'loses' in string
+                    playerWins += (result.search("wins") != -1);
+                    computerWins += (result.search("loses") != -1)
+                } else {        //early game termination
+                    console.log("Game aborted");
+                    break;
+                }
+                console.log(result);
+            }
+            //declare overall winner or tie
+            if (playerWins == computerWins) {
+                console.log(`It's tied ${playerWins} to ${computerWins}`);
+            } else if (playerWins > computerWins) {
+                 console.log(`Player wins ${playerWins} to ${computerWins}`);
+            } else console.log(`Computer wins ${computerWins} to ${playerWins}`);
+            console.table({"playerWins":playerWins, "computerWins":computerWins});    
+        }
+    
+    </script>
+</body>
+</html>
