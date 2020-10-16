@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  align-content: center;
+  background: linear-gradient(0.25turn, #d67286, #548eb4);
+}
+
+.choices {
+  display: flex;
+  width: 50%;
+  align-self: center;
+  justify-content: space-evenly;
+}
+
+.choices button {
+  font-size: 3em;
+}
+
+.result {
+  text-align: center;
+  font-size: 2em;
+  margin: 1em 0;
+}
+
+.choices button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
